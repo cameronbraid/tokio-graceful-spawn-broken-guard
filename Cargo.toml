@@ -1,0 +1,10 @@
+[package]
+name = "tokio-graceful-spawn-broken-guard"
+version = "0.0.0-PR-0-0-SNAPSHOT"
+edition = "2021"
+publish = false
+
+[dependencies]
+
+tokio = { version = "1.0", features = ["rt-multi-thread", "macros", "sync", "time","full"] }
+tokio-graceful = "0.1.6"
