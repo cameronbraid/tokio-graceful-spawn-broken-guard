@@ -1,16 +1,3 @@
-Expected results :
-
-```sh
-cargo run --bin main
-```
-
-produces :
-
-```
-guard is set
-Err(TimeoutError(1s))
-```
-
 
 Issue is when the guard is upgraded in a spawned task
 
@@ -22,6 +9,14 @@ cargo run --bin spawn
 produces :
 
 ```
-guard is set
-Ok(14.999µs)
+Doing work
+Ok(8.147µs)
+```
+
+expected :
+
+```
+Doing work
+Work done
+Ok(1.s)
 ```
