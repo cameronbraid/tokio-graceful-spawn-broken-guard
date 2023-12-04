@@ -11,16 +11,11 @@ pub async fn main() {
     // create a handle to be able to create more guards on demand, which can be cloned and passed around my app to task spawners
     let guard = shutdown.guard();
 
-    // simulate my app spawning a task that blocks shutdown
-    tokio::spawn({
-        let guard = guard.clone();
-        async move {
-            // create a strong guard to block shutdown
-            println!("Doing work");
-            tokio::time::sleep(Duration::from_secs(2)).await;
-            println!("Done working");
-            drop(guard);
-        }
+    guard.spawn_task(async move {
+        // create a strong guard to block shutdown
+        println!("Doing work");
+        tokio::time::sleep(Duration::from_secs(2)).await;
+        println!("Done working");
     });
 
     // drop my guard so that I don't block shutdown
