@@ -3,7 +3,7 @@ Issue is when the guard is upgraded in a spawned task
 
 
 ```sh
-cargo run --bin spawn
+cargo run
 ```
 
 produces :
