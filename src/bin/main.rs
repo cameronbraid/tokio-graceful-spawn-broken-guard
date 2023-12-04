@@ -15,7 +15,7 @@ pub async fn main() {
     tokio::spawn(async move {
 
         // create a strong guard to block shutdown
-        let _strong = weak.upgrade();
+        let _strong = weak.clone().upgrade();
         println!("Doing work");
         tokio::time::sleep(Duration::from_secs(1)).await;
         println!("Done working");
