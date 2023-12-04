@@ -5,13 +5,14 @@ use std::time::Duration;
 pub async fn main() {
     let shutdown = tokio_graceful::Shutdown::new(tokio::time::sleep(Duration::from_millis(500)));
 
-    let weak = shutdown.guard_weak();
-
-    tokio::spawn(async move {
-        let _strong = weak.upgrade();
-        println!("Doing work");
-        tokio::time::sleep(Duration::from_secs(1)).await;
-        println!("Done working");
+    tokio::spawn({
+        let weak = shutdown.guard_weak();
+        async move {
+            let _strong = weak.upgrade();
+            println!("Doing work");
+            tokio::time::sleep(Duration::from_secs(1)).await;
+            println!("Done working");
+        }
     });
 
     println!(
