@@ -13,6 +13,7 @@ pub async fn main() {
 
     // simulate my app spawning a task that blocks shutdown
     tokio::spawn(async move {
+
         // create a strong guard to block shutdown
         let _strong = weak.upgrade();
         println!("Doing work");
